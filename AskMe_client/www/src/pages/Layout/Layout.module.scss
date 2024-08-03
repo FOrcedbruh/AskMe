@@ -1,0 +1,29 @@
+@import '../../mixins/mixins';
+
+.header {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $text_color;
+    padding: 0 40px;
+
+    .logo {
+        cursor: pointer;
+    }
+}
+
+.outlet {
+    min-height: 90vh;
+    @include mainColor;
+}
+.footer {
+    margin-top: 10vh;
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include blockColor;
+}

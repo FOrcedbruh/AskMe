@@ -1,0 +1,22 @@
+@import '../../mixins/mixins.scss';
+.window {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+
+    article {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 70%;
+
+        h1 {
+            font-size: 30px;
+            text-align: center;
+            color: $text_color;
+        }
+    }
+}

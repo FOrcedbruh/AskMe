@@ -1,0 +1,23 @@
+@import '../../mixins/mixins';
+
+
+.aside {
+    left: 0;
+    top: 0;
+    position: fixed;
+    width: 300px;
+    height: 100vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px 20px;
+    @include blockColor;
+
+    p {
+        align-self: flex-start;
+        cursor: pointer;
+        color: $primary_color;
+    }
+}

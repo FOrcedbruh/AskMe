@@ -1,0 +1,13 @@
+$text_color: #EEEEEE;
+$primary_color: #76ABAE;
+
+@mixin mainColor {
+    color: $text_color;
+    background-color: #222831;
+}
+
+@mixin blockColor {
+    background-color: #31363F;
+    color: $text_color;
+}
+
