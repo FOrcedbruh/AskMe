@@ -6,6 +6,9 @@ import Button from '../../components/Button/Button';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
+import { regHandler } from '../../api/auth';
+import { useAuthContext } from '../../context/authContext';
+
 
 
 interface IFormState {
@@ -17,6 +20,8 @@ interface IFormState {
 
 
 const Registration: React.FC = () => {
+
+    const { setAuthUser } = useAuthContext();
 
     const {
         handleSubmit,
@@ -39,9 +44,20 @@ const Registration: React.FC = () => {
         setView(!view);
     }
 
-    const onSubmit = (data: IFormState) => {
-        
 
+
+    const onSubmit = async (data: IFormState) => {
+        const username: string = data.username;
+        const password: string = data.password;
+        const fullname: string = data.fullname;
+        const email: string = data.email;
+        
+        const res = await regHandler(username, email, fullname, gender, password);
+
+        console.log(res);
+
+        localStorage.setItem('user', JSON.stringify(res));
+        setAuthUser(res);
         reset();
     }
 
@@ -81,14 +97,17 @@ const Registration: React.FC = () => {
                     <div onClick={() => setGender('Female')} style={{'backgroundColor': gender === 'Female' ? '#76ABAE' : '#222831'}}>Female</div>
                 </div>
                 <div className={styles.password}>
-                    <input placeholder='password' type={view ? 'text' : 'password'} {...register('password', {
-                        required: 'Password is required',
-                        minLength: {
-                            value: 6,
-                            message: 'Min 6 symbols'
-                        }
-                    })}/>
-                    <button onClick={(e) => viewHandler(e)}><img src={view ? eye : closeEye} alt="eye" width={24} height={24}/></button>
+                    <div>
+                        <input placeholder='password' type={view ? 'text' : 'password'} {...register('password', {
+                            required: 'Password is required',
+                            minLength: {
+                                value: 6,
+                                message: 'Min 6 symbols'
+                            }
+                        })}/>
+                        <button onClick={(e) => viewHandler(e)}><img src={view ? eye : closeEye} alt="eye" width={24} height={24}/></button>
+                    </div>
+                    {errors.password && <motion.p initial={{ opacity: 0}} animate={{ opacity: 1}} className={styles.error}>{errors.password.message}</motion.p>}
                 </div>
                 <Button isValid={isValid} type='submit' width='100%' height='40px'>
                     Create

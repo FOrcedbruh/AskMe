@@ -14,11 +14,11 @@ const app = express();
 
 dotenv.config();
 
-const origin = process.env.CLIENT_URL;
+const origin = process.env.ORIGIN;
 
 app.use(cors({
     credentials: true,
-    origin: origin
+    origin: 'http://localhost:3000'
 }));
 app.use(express.urlencoded());
 app.use(express.json());

@@ -23,7 +23,7 @@ const generate_jwt = (res, _id) => {
 class controller {
     async registration(req, res) {
         try {
-            const { username, password, email } = req.body;
+            const { username, password, fullname, gender, email } = req.body;
 
             const candidate = await User.findOne({ username });
 
@@ -38,7 +38,9 @@ class controller {
             const user = new User({
                 username,
                 email,
-                password: hashPassord
+                password: hashPassord,
+                fullname,
+                gender
             });
 
             await user.save();
@@ -50,6 +52,8 @@ class controller {
                 username: user.username,
                 userId: user._id,
                 email: user.email,
+                gender: user.gender,
+                fullname: user.fullname,
                 avatar: user.avatar
             });
         } catch (error) {

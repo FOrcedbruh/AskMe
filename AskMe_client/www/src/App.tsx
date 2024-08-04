@@ -3,20 +3,28 @@ import Layout from "./pages/Layout/Layout";
 import Home from "./pages/Home/Home";
 import Registration from "./pages/Registration/Registration";
 import Login from "./pages/Login/Login";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+
+
 
 const App: React.FC = () => {
     
 
+    const client = new QueryClient();
+
     return (
-        <main className="container">
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route path="/" element={<Home />}/>
-                    <Route path="/registration" element={<Registration />}/>
-                    <Route path="/login" element={<Login />}/> 
-                </Route>
-            </Routes>
-        </main>
+        <QueryClientProvider client={client}>
+            <main className="container">
+                    <Routes>
+                        <Route path="/" element={<Layout />}>
+                            <Route path="/" element={<Home />}/>
+                            <Route path="/registration" element={<Registration />}/>
+                            <Route path="/login" element={<Login />}/> 
+                        </Route>
+                    </Routes>
+            </main>
+        </QueryClientProvider>
+        
     )
 }
 

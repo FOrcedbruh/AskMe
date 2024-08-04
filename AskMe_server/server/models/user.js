@@ -17,6 +17,14 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    fullname: {
+        type: String,
+        required: true
+    },
+    gender: {
+        type: String,
+        required: true
+    },
     avatar: {
         type: String,
         default: ''

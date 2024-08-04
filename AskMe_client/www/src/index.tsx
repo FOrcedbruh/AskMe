@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './global.scss';
 import { BrowserRouter } from 'react-router-dom';
-
+import { AuthContextProvider } from './context/authContext';
 
 
 
@@ -13,7 +13,9 @@ if (rootEl) {
   root.render(
     <React.StrictMode>
       <BrowserRouter>
-        <App />
+        <AuthContextProvider>
+          <App />
+        </AuthContextProvider>
       </BrowserRouter>
     </React.StrictMode>,
   );
