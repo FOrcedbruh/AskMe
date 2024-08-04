@@ -3,6 +3,9 @@ const cors = require('cors')
 const dotenv = require('dotenv');
 const authRouter = require('./auth/authRouter');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+const postsRouter = require('./posts.module/postsRouter');
+
 
 const app = express();
 
@@ -11,10 +14,15 @@ const app = express();
 
 dotenv.config();
 
-app.use(cors());
+const origin = process.env.CLIENT_URL;
+
+app.use(cors({
+    credentials: true,
+    origin: origin
+}));
 app.use(express.urlencoded());
 app.use(express.json());
-
+app.use(cookieParser());
 
 
 const PORT = process.env.PORT || 1234;
@@ -22,6 +30,7 @@ const PORT = process.env.PORT || 1234;
 // routes
 
 app.use('/auth', authRouter);
+app.use('/posts', postsRouter);
 
 app.get('/', (req, res) => {
     res.send("Hello, its AskMe");

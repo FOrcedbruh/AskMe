@@ -20,4 +20,37 @@
         cursor: pointer;
         color: $primary_color;
     }
+
+    .menu {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: fit-content;
+        padding: 20px 0;
+        gap: 10px;
+        list-style: none;
+
+        li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            text-align: start;
+            border-radius: 10px;
+            background-color: $main_color;
+
+            a {
+                text-decoration: none;
+                color: #fff;
+                width: 100%;
+                padding: 10px 20px;
+            }
+        }
+
+        li:hover {
+            background-color: $primary_color;
+        }
+    }
 }

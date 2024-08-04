@@ -12,6 +12,29 @@
     .logo {
         cursor: pointer;
     }
+
+    .auth {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+
+        a:first-child {
+            text-decoration: none;
+            color: $text_color;
+            background-color: $primary_color;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        a:last-child {
+            text-decoration: none;
+            color: $primary_color;
+            padding: 10px 20px;
+        }
+        a:hover {
+            opacity: 0.7;
+        }
+    }
 }
 
 .outlet {

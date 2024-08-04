@@ -13,10 +13,18 @@ const PostSchema = new Schema({
         type: String,
         required: true
     },
-    user: {
+    images: [
+        {
+            type: String,
+            default: []
+        }
+    ],
+    author: {
         type: mongoose.Schema.ObjectId,
         ref: 'User'
     }
+}, {
+    timestamps: true
 });
 
 

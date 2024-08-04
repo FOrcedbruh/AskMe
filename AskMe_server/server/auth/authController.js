@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('./../models/user');
-
-const secret = process.env.JWT_SECRET;
+const secret = require('./../utils/secret');
 
 const generate_jwt = (res, _id) => {
 
@@ -12,10 +11,10 @@ const generate_jwt = (res, _id) => {
 
     const token = jwt.sign(payload, secret, { expiresIn: '15d'});
 
-    res.cookie('token', token, {
+    return res.cookie('jwt', token, {
         httpOnly: true,
         sameSite: 'strict',
-        secure: false
+        maxAge: 15 * 24 * 60 * 60 * 1000,
     });
 }
 
@@ -44,11 +43,14 @@ class controller {
 
             await user.save();
 
-            generate_jwt(res, user._id);
+            await generate_jwt(res, user._id);
 
 
             return res.status(200).json({
-                message: 'Successfull login'
+                username: user.username,
+                userId: user._id,
+                email: user.email,
+                avatar: user.avatar
             });
         } catch (error) {
             console.log(error);
@@ -57,7 +59,57 @@ class controller {
             });
         }
     }
+    async login(req, res) {
+        try {
+            const { email, password } = req.body;
 
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                return res.status(400).json({
+                    message: `User with email ${email} does not exists`
+                })
+            }
+
+            const validPassword = bcrypt.compareSync(password, user.password);
+
+            if (!validPassword) {
+                return res.status(400).json({
+                    message: 'Incorrect password'
+                })
+            }
+
+            await generate_jwt(res, user._id);
+
+            return res.status(200).json({
+                username: user.username,
+                userId: user._id,
+                email: user.email,
+                avatar: user.avatar
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({
+                message: 'Server error'
+            })
+        }
+    }
+    async logout(req, res) {
+        try {
+            res.cookie('jwt', '', {
+                maxAge: 0
+            });
+
+            return res.status(200).json({
+                message: 'successfully logout'
+            })
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({
+                message: "Server error"
+            })
+        }
+    }
 }
 
 

@@ -5,7 +5,7 @@ const authRouter = express.Router();
 
 
 authRouter.post('/registration', controller.registration);
-authRouter.post('/login', );
-authRouter.post('/logout', );
+authRouter.post('/login', controller.login);
+authRouter.post('/logout', controller.logout);
 
 module.exports = authRouter;

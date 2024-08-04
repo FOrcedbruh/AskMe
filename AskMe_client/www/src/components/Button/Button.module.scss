@@ -1,0 +1,19 @@
+@import './../../mixins/mixins';
+
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: $primary_color;
+    color: $text_color;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.button:hover {
+    opacity: 0.8;
+}
