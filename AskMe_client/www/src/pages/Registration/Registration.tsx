@@ -3,7 +3,7 @@ import styles from './Registration.module.scss'
 import eye from './../../icons/eye.svg';
 import closeEye from './../../icons/closeEye.svg';
 import Button from '../../components/Button/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { regHandler } from '../../api/auth';
@@ -20,6 +20,8 @@ interface IFormState {
 
 
 const Registration: React.FC = () => {
+    
+    const navigate = useNavigate()
 
     const { setAuthUser } = useAuthContext();
 
@@ -54,11 +56,16 @@ const Registration: React.FC = () => {
         
         const res = await regHandler(username, email, fullname, gender, password);
 
-        console.log(res);
 
         localStorage.setItem('user', JSON.stringify(res));
         setAuthUser(res);
+
         reset();
+
+        if (localStorage.getItem('user')) {
+            navigate('/')
+        }
+
     }
 
     return (

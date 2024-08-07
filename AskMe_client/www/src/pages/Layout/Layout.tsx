@@ -1,10 +1,16 @@
 import styles from './Layout.module.scss';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import { useAuthContext } from '../../context/authContext';
+import avatarIcon from './../../icons/account.svg';
+import arrowIcon from './../../icons/arrow.svg'
+
+
 
 const Layout: React.FC = () => {
+
+    const navigate = useNavigate()
 
     const [sidebar, setSidebar] = useState<boolean>(false);
     const { authUser } = useAuthContext();
@@ -17,7 +23,7 @@ const Layout: React.FC = () => {
                 {!authUser ? <div className={styles.auth}>
                     <Link to={'/login'}>Log in</Link>
                     <Link to={'/registration'}>Sign up</Link>
-                </div> : <div>{authUser.username}</div>}
+                </div> : <div onClick={() => navigate('/account')} className={styles.authStatus}><img src={avatarIcon} width={30} height={30}/>{authUser.username} <img src={arrowIcon} width={20} height={20}/></div>}
             </header>
             <section className={styles.outlet}>
                 <Outlet />
@@ -28,6 +34,7 @@ const Layout: React.FC = () => {
         </>
     )
 }
+
 
 
 

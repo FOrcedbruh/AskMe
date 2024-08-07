@@ -89,6 +89,8 @@ class controller {
                 username: user.username,
                 userId: user._id,
                 email: user.email,
+                gender: user.gender,
+                fullname: user.fullname,
                 avatar: user.avatar
             });
         } catch (error) {

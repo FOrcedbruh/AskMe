@@ -7,7 +7,7 @@
     justify-content: space-between;
     align-items: center;
     color: $text_color;
-    padding: 0 40px;
+    padding: 0 50px;
 
     .logo {
         cursor: pointer;
@@ -35,6 +35,20 @@
             opacity: 0.7;
         }
     }
+}
+
+.authStatus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    user-select: none;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.authStatus:hover {
+    background-color: #353535;
 }
 
 .outlet {

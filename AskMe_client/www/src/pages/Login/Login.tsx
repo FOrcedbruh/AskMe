@@ -3,8 +3,10 @@ import styles from './Login.module.scss'
 import eye from './../../icons/eye.svg';
 import closeEye from './../../icons/closeEye.svg';
 import Button from '../../components/Button/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { loginHandler } from '../../api/auth';
+import { useAuthContext } from '../../context/authContext';
 
 
 interface IStateProps {
@@ -14,6 +16,10 @@ interface IStateProps {
 
 
 const Login: React.FC = () => {
+
+    const navigate = useNavigate()
+
+    const { setAuthUser } = useAuthContext()
 
     const {
         handleSubmit,
@@ -34,15 +40,22 @@ const Login: React.FC = () => {
         setView(!view);
     }
 
-    const onSubmit = (data: IStateProps) => {
+
+    const onSubmit = async (data: IStateProps) => {
         const email: string = data.email
         const password: string = data.passowrd;
 
+        const res = await loginHandler(email, password);
 
-
-        console.log(data);
+        localStorage.setItem('user', JSON.stringify(res));
+        setAuthUser(res);
         reset();
+
+        if (localStorage.getItem('user')) {
+            navigate('/')
+        }
     }
+
 
     return (
         <section className={styles.window}>
@@ -72,7 +85,7 @@ const Login: React.FC = () => {
                     </div>
                     {errors.passowrd && <p className={styles.error}>{errors.passowrd.message}</p>}
                 </div>
-                <Button type='submit' width='100%' height='40px'>
+                <Button isValid={isValid} type='submit' width='100%' height='40px'>
                     Sign in
                 </Button>
                 <article><p>Don't have an account?</p><Link to={'/registration'}>Create</Link></article>
