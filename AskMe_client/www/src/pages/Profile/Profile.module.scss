@@ -8,6 +8,7 @@
     justify-content: start;
     align-items: center;
     padding: 40px 20px;
+    gap: 80px;
 
     .backBtn {
         display: flex;
@@ -28,5 +29,25 @@
 
     .backBtn:hover {
         background-color: #353535;
+    }
+}
+
+
+.userInfo {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+
+    .email {
+        color: #727272;
+    }
+
+    .avatar {
+        user-select: none;
     }
 }

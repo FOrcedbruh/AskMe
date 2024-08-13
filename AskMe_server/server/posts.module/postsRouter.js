@@ -8,8 +8,8 @@ const postsRouter = express.Router();
 
 
 postsRouter.post('/create', protectRoute,  controller.createPost);
-postsRouter.get('/posts', protectRoute,  );
-postsRouter.post('/post/:id', );
+postsRouter.get('/', protectRoute,  );
+postsRouter.post('/:id', );
 
 
 

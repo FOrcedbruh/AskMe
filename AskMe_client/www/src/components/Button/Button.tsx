@@ -6,7 +6,7 @@ interface IButtonProps {
     children: React.ReactNode,
     width?: string,
     height?: string,
-    clickHandler?: () => void,
+    clickHandler: () => void,
     type?: 'submit' | 'button' | 'reset' | undefined,
     isValid?: boolean,
 }
@@ -14,7 +14,7 @@ interface IButtonProps {
 
 const Button: FC<IButtonProps> = ({ children, width, height, clickHandler, type, isValid }) => {
     return (
-        <button disabled={!isValid} type={type} onClick={clickHandler} style={{'width': width, 'height': height}} className={styles.button}>
+        <button onClick={clickHandler} type={type}  style={{'width': width, 'height': height}} className={styles.button}>
             {children}
         </button>
     )
